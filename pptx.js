@@ -623,26 +623,26 @@ if(P.selectAll("line, text").style("opacity",1),v){var Q=function(a,b){return"tr
             $(".slides-loadnig-msg").remove()
         }
         if (settings.fileInputId != "") {
-            $("#" + settings.fileInputId).on("change", function (evt) {
-                $result.html("");
-                var file = evt.target.files[0];
-                // var fileName = file[0].name;
-                //var fileSize = file[0].size;
-                var fileType = file.type;
-                if (fileType == "application/vnd.openxmlformats-officedocument.presentationml.presentation") {
-                    FileReaderJS.setupBlob(file, {
-                        readAsDefault: "ArrayBuffer",
-                        on: {
-                            load: function (e, file) {
-                                //console.log(e.target.result);
-                                convertToHtml(e.target.result);
-                            }
+            let el = document.getElementById(settings.fileInputId);
+            $result.html("");
+            var file = el.files[0];
+            // var fileName = file[0].name;
+            //var fileSize = file[0].size;
+            var fileType = file.type;
+            if (fileType == "application/vnd.openxmlformats-officedocument.presentationml.presentation") {
+                FileReaderJS.setupBlob(file, {
+                    readAsDefault: "ArrayBuffer",
+                    on: {
+                        load: function (e, file) {
+                            //console.log(e.target.result);
+                            convertToHtml(e.target.result);
                         }
-                    });
-                } else {
-                    alert("This is not pptx file");
-                }
-            });
+                    }
+                });
+            } else {
+                alert("This is not pptx file");
+            }
+        
         }
 
         function updateProgressBar(percent) {
